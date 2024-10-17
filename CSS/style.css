@@ -1,0 +1,814 @@
+
+/*importing font style open Poppins*/
+
+@import url('https://fonts.googleapis.com/css2?family=Anta&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap');
+body{
+    font-family: Poppins;
+    margin: 0;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+
+    background-color: rgb(0, 0, 0);
+
+
+}
+
+
+
+#app{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr) ;
+    grid-template-rows: 100px 100% auto;
+    overflow-x: hidden;
+    overflow-y: hidden;    
+
+    grid-template-areas: 
+    "header   header   header"
+    "cont     cont     cont  "
+    "footer   footer   footer";
+    background: rgb(15,0,80);
+    background: linear-gradient(0deg, rgb(5, 0, 27) 0%, rgb(53, 0, 0) 100%);
+    font-size: 12px;
+  
+    gap: 10px;
+  
+
+
+}
+/*header section*/
+.header{
+    grid-area: header;
+    z-index: 2;
+    width: 100%;
+    height: 70px ;
+  
+ 
+    
+
+}
+
+.header .nav nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-left: 4%;
+    margin-right: 4%;
+    
+
+}
+
+.header .nav .links{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    text-decoration: none;
+}
+
+
+
+.header .nav .links a{
+
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: white;
+    text-decoration: none;
+  
+  
+    border-radius: 5px;
+
+
+}
+
+.header .nav .title{
+    width: fit-content;
+    font-size: 1.2rem;
+    position: relative;
+    left: 4%;
+    font-family: "Cedarville Cursive", cursive;
+    letter-spacing: 4px;
+
+}
+
+
+.header .nav .title h1{
+    font-weight: 700;
+    color: rgb(255, 255, 255);
+    
+
+
+}
+
+
+.header .nav .title h1 span{
+    color: rgb(230, 0, 0);
+
+}
+
+.header .nav .Icons{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+
+
+.header .nav .Icons a{
+    text-decoration: none;
+
+}
+
+
+
+.header .nav .Icons .Cart i{
+    font-size: 1.2rem;
+
+}
+
+.header .nav .Icons i{
+    color: white;
+    text-decoration: none;
+    font-size: 1.4rem;
+    
+    
+}
+
+
+.header .nav .Search{
+    display: flex;
+    flex-direction: row;
+    gap: 0px;
+}
+.header .nav .Search .searchIcon i{
+    position: relative;
+    font-size: 1rem;
+  
+    left: 100%;
+    z-index: 1;
+    border-radius: 5px;
+
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(255, 0, 0);
+    padding: 5.6px;
+  
+    
+}
+
+
+
+
+.header .nav .Search input{
+    position: relative;
+    bottom: 18%;
+    padding: 4px;
+    width: 20em;
+    height: 1.4em;
+    padding-left: 40px;
+    border: none;
+    border-radius: 5px;
+   
+    background-image: linear-gradient(
+      120deg,
+      rgba(255, 255, 255),
+      rgb(255, 255, 255)
+      
+  
+    );
+    
+}
+
+
+.Search input:focus{
+    outline: 3px solid rgb(255, 0, 0);
+   
+  }
+
+/*content section*/
+
+.Content{
+    grid-area: cont;
+}
+
+.Home{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 100vh 100% auto ;
+    grid-template-areas: 
+    "Title    Title    .       "
+    "GridShow GridShow GridShow";
+    
+    
+  
+    gap: 30px;
+    
+}
+
+
+
+/*Background*/
+
+.Home .item{
+    position: absolute;
+    top: 0px;
+   filter: brightness(70%);
+    
+    z-index: 0;
+
+}
+
+.Home .item img{
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    
+ 
+}
+
+.Home .title{
+
+    grid-area: Title;
+    margin-left: 14%;
+    margin-right: 14%;
+    z-index: 1;
+    letter-spacing: 4px;
+    line-height: 3px;
+    color: white;
+    white-space: nowrap;
+   
+}
+
+
+.Home .title h1{
+    font-size: 4rem;
+    line-height: 60px;
+    font-family: "Cedarville Cursive", cursive;
+
+}
+
+
+.Home .title h2{
+    font-size: 4rem;
+    
+
+}
+
+.Home .title .button{
+    line-height: 80px;
+    
+}
+
+
+.Home .title .button button{
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.6rem;
+    font-weight: 800px;
+    color: rgb(255, 255, 255);
+    background: rgb(15,0,80);
+    background: linear-gradient(180deg, rgba(15,0,80,1) 0%, rgba(231,0,0,1) 100%);
+    transition: 0.3s ease-out;
+    position: relative;
+    bottom: 0px;
+
+}
+
+
+.Home .title .button button:hover{
+    bottom: 2px;
+    cursor: pointer;
+    
+
+}
+
+.Home .promo{
+    width: 100%;
+    height: 6%;
+    z-index: 1;
+    text-align: center;
+    background-color: black;
+    position: absolute;
+    bottom: 0%;
+
+
+}
+
+
+.Home .promo p{
+    color: white;
+
+}
+
+.Home .GridShowcase{
+    grid-area: GridShow;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 700px 700px 500px auto;
+    grid-template-areas: 
+    "showcase showcase  showcase"
+    "Learn     Learn    Learn   "
+    "News      News     News    ";
+    margin-left: 4%;
+    margin-right: 4%;
+
+}
+
+
+
+.Home .showcase{
+    grid-area: showcase;
+    display: flex;
+  
+    flex-direction: column;
+    gap: 80px;
+    z-index: 1;
+    margin-left: 6%;
+    margin-right: 8%;
+   
+    
+    border-radius: 5px;
+
+
+}
+
+
+.Home .showcase .heading {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+}
+
+
+.Home .showcase .heading .Ptitle{
+    position: relative;
+    top: 4%;
+    font-family: "Exo", sans-serif;
+    letter-spacing: 8px;
+    line-height: 8px;
+}
+
+
+.Home .showcase .heading .Ptitle h1, h2{
+   font-size: 1.6rem;
+   color: white;
+    
+}
+
+
+.Home .showcase .heading .showcase-Buttons{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+
+}
+
+
+.Home .showcase .heading .showcase-Buttons i{
+    color: white;
+    font-size: 2.2rem;
+
+}
+
+.Home .showcase .heading .showcase-Buttons i:hover{
+    color: rgb(173, 173, 173);
+    cursor: pointer;
+
+}
+
+
+.Home .showcase .heading .showcase-Buttons i:active{
+    color: rgb(117, 117, 117) ;
+}
+
+.Home .showcase .Top-Products{
+    display: flex;
+    flex-direction: row;
+    overflow-x: scroll;
+    scrollbar-width: none;
+    overflow-y: hidden;
+    width: 100%;
+    height: 90%;
+    position: relative;
+    
+    bottom: 10%;
+    gap: 20px;
+
+}
+
+.Home .showcase .Top-Products .product .Content .PopularImg{
+    position: absolute;
+    inset: 0 0 0 0;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  
+  
+  
+}
+
+
+.Home .showcase .Top-Products .product .Content .PopularImg img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+    filter: grayscale(1) brightness(60%);
+    transition: 0.3s ease-out;
+    
+}
+
+
+.Home .showcase .Top-Products .product .Content .PopularImg img:hover{
+    filter: grayscale(0) brightness(100%);
+    cursor: pointer;
+
+}
+
+.Home .showcase .Top-Products .product .Content{
+    background-color: transparent;
+    backdrop-filter: blur(5px);
+    background-image:  linear-gradient(
+        rgba(235, 6, 6),
+        rgb(231, 209, 3)
+    );
+    
+    width: 300px;
+    height: 40em;
+    border-radius: 5px;
+    
+   
+    
+    
+
+}
+
+
+.Home .showcase .Top-Products .product .Content .PopularTag{
+    position: relative;
+    left: 60%;
+    top: 4%;
+    background-color: red;
+    width: 130px;
+    box-shadow: 5px 5px 5px black;
+    
+
+
+
+}
+
+
+.Home .showcase .Top-Products .product .Content .PopularTag h1{
+    font-size: 0.8rem;
+    color: white;
+    text-align: center;
+
+}
+
+
+.Home .showcase .Top-Products .product .Content .txt-content{
+    position: relative;
+    text-align: center;
+    top: 50%;
+    line-height: 8px;
+    pointer-events: none;
+    
+    
+   
+
+
+
+}
+
+
+.Home .showcase .Top-Products .product .Content .txt-content .PopularName h1{
+    color: white;
+    font-size: 2rem;
+    letter-spacing: 4px;
+   
+}
+
+
+.Home .showcase .Top-Products .product .Content .txt-content .PopularLocation h1{
+    color: rgb(248, 248, 248);
+    font-weight: 300;
+    letter-spacing: 2px;
+    
+
+}
+
+
+.Home .showcase .Top-Products .product .Content .txt-content .PopularPrice{
+    position: relative;
+    top: 60px;
+    left: 16%;
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+    gap: 12px;
+
+}
+
+
+.Home .showcase .Top-Products .product .Content .txt-content .PopularPrice #price{
+    padding: 10px;
+    width: 100px;
+    background-color: blueviolet;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    position: relative;
+    top: 0px;
+    transition: 0.3s ease-out;
+    pointer-events: all;
+
+}
+
+
+.Home .showcase .Top-Products .product .Content .txt-content .PopularPrice #More{
+    padding: 10px;
+    width: 100px;
+    background-color: transparent;
+    border: 2px solid blueviolet;
+    color: blueviolet;
+    font-weight: 600;
+    border-radius: 25px;
+    position: relative;
+    top: 0px;
+    transition: 0.3s ease-out;
+    pointer-events: all;
+
+}
+
+
+.Home .showcase .Top-Products .product .Content .txt-content .PopularPrice #price:hover{
+    top: -2px;
+    cursor: pointer;
+}
+
+
+.Home .showcase .Top-Products .product .Content .txt-content .PopularPrice #More:hover{
+    top: -2px;
+    cursor: pointer;
+}
+
+.Home .Mission{
+    grid-area: Learn;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 150px 110px auto;
+    grid-template-areas: 
+    "img       title   "
+    "img       Dec     "
+    "img       stats   ";
+    margin-left: 4%;
+    margin-right: 4%;
+}
+
+.Home .Mission .img{
+    grid-area: img;
+}
+
+
+.Home .Mission .img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.Home .Mission .MTitle{
+    grid-area: title;
+    letter-spacing: 4px;
+    
+    line-height: 44px;
+    
+
+}
+
+
+.Home .Mission .MTitle h1{
+
+    font-size: 3rem;
+    color: white;
+    text-align: center;
+
+}
+
+
+.Home .Mission .MTitle h1 span{
+
+    font-family: "Cedarville Cursive", cursive;
+    font-size: 2.6rem;
+    color: rgb(255, 0, 0);
+
+}
+
+
+.Home .Mission .description{
+    grid-area: Dec;
+}
+
+
+.Home .Mission .description p{
+    color: rgb(184, 184, 184);
+    text-align: center;
+
+}
+
+
+.Home .Mission .Stats{
+    grid-area: stats;
+    display: flex;
+    white-space: nowrap;
+    flex-direction: row;
+    gap: 20px;
+    text-align: center;
+    position: relative;
+    left: 4%;
+    line-height: 30px;
+
+}
+
+
+
+.Home .Mission .Stats h1{
+    color: white;
+    width: fit-content;
+    font-size: 0.8rem;
+    letter-spacing: 4px;
+    font-weight: 900;
+    margin: 0;
+
+}
+
+
+.Home .Mission .Stats p{
+    background: #0E18A3;
+    font-size: 2rem;
+    background: linear-gradient(to right, #0E18A3 0%, #A40000 100%);
+    margin: 0;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+}
+
+
+.Home .News{
+    grid-area: News;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 200px 130px 100px auto;
+    grid-template-areas: 
+    "title"
+    "email"
+    "quick"
+    "social";
+    margin-left: 4%;
+    margin-right: 4%;
+    justify-items: center;
+}
+
+
+.Home .News .NTitle{
+    grid-area: title;
+    text-align: center;
+    line-height: 8px;
+    letter-spacing: 8px;
+
+}
+
+
+.Home .News .NTitle h1, h2{
+    color: white;
+    font-size: 4rem;
+}
+
+
+.Home .News .NTitle h2{
+    color: rgb(248, 4, 4);
+    font-size: 4rem;
+}
+
+
+
+.Home .News .email_input{
+    grid-area: email;
+    align-items: center;
+    position: relative;
+
+}
+
+
+
+.Home .News .email_input input{
+    width: 500px;
+    height: 40px;
+    padding: 10px;
+    border: 2px solid grey;
+    background-color: transparent;
+    color: white;
+    
+}
+
+.Home .News .email_input input:focus{
+    outline: none
+
+}
+
+
+.Home .News .email_input button{
+    position: absolute;
+    right: 2%;
+    top: 8%;
+    padding: 14px;
+    border: none;
+    background-color: red;
+    color: white;
+    transition: 0.3s ease-out;
+    
+}
+
+.Home .News .email_input button:hover{
+    background-color: rgb(199, 0, 0);
+    cursor: pointer;
+
+}
+
+
+
+
+.Home .News .quick_links{
+    grid-area: quick;
+    display: flex;
+    flex-direction: row;
+    gap: 60px;
+
+}
+
+
+.Home .News .quick_links a{
+    text-decoration: none;
+    color: white;
+    font-size: 1rem;
+    
+}
+
+
+
+.Home .News .Social-logos{
+    grid-area: social;
+    display: flex;
+    flex-direction: row;
+    gap: 60px;
+}
+
+
+.Home .News .Social-logos i{
+    color: white;
+    font-size: 2rem;
+    transition: 0.3s ease-out;
+
+
+}
+
+
+.Home .News .Social-logos i:hover{
+    color: rgb(184, 184, 184);
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*footer section*/
+.footer{
+    grid-area: footer;
+}
+
+
+.footer h1{
+    color: white;
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 300;
+
+
+}

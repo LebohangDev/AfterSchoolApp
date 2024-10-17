@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./CSS/style.css">
+    <title>After School App</title>
+     <!-- External icon libraries -->
+     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    
+</head>
+<body>
+
+    
+   
+   
+    <!--Mounting-->
+    <div id="app">
+      
+        <header class="header">
+            <div class="nav">
+                <nav>
+                    <div class="links">
+                        <a href="#Home" v-on:click="currentSection('Home')">Home</a>
+                        <a href="#About" v-on:click="currentSection('About')">About</a>
+                        <a href="#Contact" v-on:Click="currentSection('Contact')">Contact</a>
+                        <a href="#Activites" v-on:Click="currentSection('Activities')">Activities</a>
+
+                    </div>
+                    <div class="title">
+                        <h1><span>J</span>AZKA</h1>
+                    </div>
+                 
+        
+                    <div class="Icons">
+                        <div class="Search">
+                           
+                            <div class="searchIcon">
+                                <i class="ri-search-line"></i>
+            
+                            </div>
+                             <input type="text" id="search"  placeholder="Search activity or location">
+                        </div>
+                        <div class="Cart">
+                            <a href="#Checkout" v-on:Click="currentSection('Checkout')"><i class="ri-shopping-cart-2-line"></i></a>
+
+                        </div>
+                       
+                        
+                      
+                    </div>
+                </nav>
+            </div>
+        
+        </header>
+        
+
+        <div class="Content">
+            <!--Background-->
+           
+
+           <div class="Home" v-if="currentSection === 'Home'">
+                <div class="item">
+                    <img src="./Images/Background/torii-gate-alone-mountain-scenery-digital-art-4k-wallpaper-uhdpaper.com-84@2@b.jpg" alt="">
+                </div>
+
+                <div class="title">
+                    <h1>JAZKA</h1>
+                    <h2>ACTIVITIES</h2>
+                    <p>YOUR GO TO PLACE FOR AFTER SCHOOL ACTIVITES</p>
+                    <div class="button">
+                        <button v-on:click="currentSection('Activities')">GO EXPLORE</button>
+                    </div>
+                    
+                </div>
+
+                <div class="promo">
+                    <p>Get 20% off first time orders</p>
+                </div>
+
+                <div class="GridShowcase">
+                    <div class="showcase">
+                        <div class="heading">
+                            <div class="Ptitle">
+                                <h1>POPULAR ACTIVITES</h1>
+                               
+                               
+                                
+                            </div>
+    
+                            <div class="showcase-Buttons">
+                                <div class="left-button">
+                                    <i class="ri-arrow-left-circle-fill"></i>
+    
+                                </div>
+                                <div class="right-button">
+                                    <i class="ri-arrow-right-circle-fill"></i>
+                                </div>
+    
+                            </div>
+    
+                        </div>
+                        
+                        <div  class="Top-Products">
+                            <div class="product" :key="Activity.id"  v-for="Activity in Activities" v-if="Activity.isPopular ? true : null">
+                               
+                                <div class="Content">
+                                    <div class="PopularTag">
+                                        <h1>MOST POPULAR</h1>
+
+                                    </div>
+                                    <div class="PopularImg">
+                                        <img v-bind:src="Activity.img" alt="">
+        
+                                    </div>
+                                    <div class="txt-content">
+                                        <div class="PopularName">
+                                            <h1>{{Activity.name}}</h1>
+            
+                                        </div>
+                                        <div class="PopularLocation">
+                                            <h1>{{Activity.location}}</h1>
+                                        </div>
+                                        <div class="PopularPrice">
+                                            <button id="More"> SEE MORE </button>
+                                            <button id="price"><i class="ri-shopping-cart-2-line"></i> {{Activity.price}}</button>
+                                           
+                                        </div>
+        
+    
+                                    </div>
+                                   
+                                </div>
+                             
+    
+                              
+                                
+    
+                            </div>
+    
+            
+                            
+    
+                        </div>
+    
+                    </div>
+
+                    <div class="Mission">
+                        <div class="img">
+                            <img src="/Images/logo.png" alt="">
+                        </div>
+                        <div class="MTitle">
+                            <h1>LEARN ABOUT <span>JAZKA</span>ACTIVITIES</h1>
+
+                        </div>
+                        <div class="description">
+                            <p>JAZKA, a leading provider of after-school programs in Japan, offers a diverse range of activities designed to support the holistic development of students. Through their comprehensive bukatsu offerings, JAZKA allows students to explore various interests, from popular sports like baseball and soccer to enriching cultural experiences such as calligraphy, tea ceremonies, and music.</p>
+                        </div>
+
+                        <div class="Stats">
+                            <div class="Stat1">
+                                <h1>STUDENTS</h1>
+                                <p>1000+</p>
+                            </div>
+                            <div class="Stat2">
+                                <h1>ACTIVITIES</h1>
+                                <p>15+</p>
+                            </div>
+                            <div class="Stat3">
+                                <h1>RATED</h1>
+                                <p>#1 BEST SERVICE</p>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="News">
+                        <div class="NTitle">
+                            <H1>GET OUR</H1>
+                            <H2>LATEST NEWS</H2>
+                        </div>
+                        <div class="email_input">
+                            <input type="email" placeholder=" Email Address">
+                            <button type="submit">Email Address</button>
+                        </div>
+                        <div class="quick_links">
+                            <a href="#">Home</a>
+                            <a href="#">Contact</a>
+                            <a href="#">Activities</a>
+                        </div>
+
+                        <div class="Social-logos">
+                            <i class="ri-instagram-fill"></i>
+                            <i class="ri-facebook-fill"></i>
+                            <i class="ri-twitter-x-line"></i>
+
+
+                        </div>
+
+                    </div>
+
+                   
+
+
+                </div>
+                
+
+               
+
+
+                
+                
+            
+            </div>
+
+           
+           <div class="About" v-if="currentSection === 'About'">
+
+
+           </div>
+
+           
+           <div class="Contact" v-if="currentSection === 'Contact'">
+
+            
+           </div>
+
+           
+           <div class="Activities" v-if="currentSection === 'Activities'">
+
+            
+           </div>
+
+        </div>
+
+
+
+    </div>
+        
+    
+
+    <footer class="footer">
+        <h1><i class="ri-copyright-line"></i> All Righs Resrved by LDEV</h1>
+
+
+    </footer>
+
+
+    <script type="text/javascript">
+        // vue instance
+        var app = new Vue({
+            el: '#app', // dom mounting point
+            data: {
+                currentSection: 'Home', // intially setting current location to Home section
+                sitename: 'JAZKA',
+                Activities:[
+                    {
+                        name: 'Football',
+                        id: 1,
+                        img: '/Images/Activities-IMG/football.jpg',
+                        location: 'TOKYO',
+                        space: '6',
+                        price: '23.30',
+                        isPopular: true
+                    },
+                    {
+                        name: 'Basketball',
+                        id: 2,
+                        img: '/Images/Activities-IMG/basketball.jpg',
+                        location: 'OSAKA',
+                        space: '9',
+                        price: '20.30',
+                        isPopular: true
+                    },
+                    {
+                        name: 'Archery',
+                        id: 3,
+                        img: '/Images/Activities-IMG/—Pngtree—basic basketball drawing_14543340.png',
+                        location: 'TOKYO',
+                        space: '14',
+                        price: '16.50',
+                        isPopular: false
+                    },
+                    {
+                        name: 'Volleyball',
+                        id: 4,
+                        img: '/Images/Activities-IMG/Volleyball.jpg',
+                        location: 'SHIBUYA',
+                        space: '7',
+                        price: '19.30',
+                        isPopular: true
+                    },
+                    {
+                        name: 'Swimming',
+                        id: 5,
+                        img: '/Images/Activities-IMG/swimming.jpg',
+                        location: 'TOKYO',
+                        space: '3',
+                        price: '19.30',
+                        isPopular: true
+                    },
+                    {
+                        name: 'Baseball',
+                        id: 5,
+                        img: '/Images/Activities-IMG/baseball.jpg',
+                        location: 'OSAKA',
+                        space: '6',
+                        price: '25.30',
+                        isPopular: true
+                    }
+                    
+
+                ],
+
+            
+
+                
+            },
+
+            methods: {
+                changeSection: function(section){
+                    this.currentSection = section; // setting currentsection to the section passed when the function is called
+                }
+            }
+
+        })
+    </script>
+   
+    
+</body>
+</html>
