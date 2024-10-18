@@ -19,14 +19,14 @@
     <!--Mounting-->
     <div id="app">
       
-        <header class="header">
+        <header class="header" v-if="currentSection !== 'Checkout'">
             <div class="nav">
                 <nav>
                     <div class="links">
-                        <a href="#Home" v-on:click="currentSection('Home')">Home</a>
-                        <a href="#About" v-on:click="currentSection('About')">About</a>
-                        <a href="#Contact" v-on:Click="currentSection('Contact')">Contact</a>
-                        <a href="#Activites" v-on:Click="currentSection('Activities')">Activities</a>
+                        <a href="#Home" v-on:click="changeSection('Home')">Home</a>
+                        <a href="#About" v-on:click="changeSection('About')">About</a>
+                        <a href="#Contact" v-on:Click="changeSection('Contact')">Contact</a>
+                        <a href="#Activites" v-on:Click="changeSection('Activities')">Activities</a>
 
                     </div>
                     <div class="title">
@@ -44,7 +44,11 @@
                              <input type="text" id="search"  placeholder="Search activity or location">
                         </div>
                         <div class="Cart">
-                            <a href="#Checkout" v-on:Click="currentSection('Checkout')"><i class="ri-shopping-cart-2-line"></i></a>
+                            <a href="#Checkout" v-on:Click="changeSection('Checkout')" v-if="cartCount >=1"><i class="ri-shopping-cart-2-line"></i></a>
+                            <a href="#" v-else  v-on:Click="showAlert()"><i class="ri-shopping-cart-2-line"></i></a>
+                            <span v-if="cartCount > 0">
+                                <div class="cartCount">{{cartCount}}</div>
+                            </span>
 
                         </div>
                        
@@ -71,7 +75,7 @@
                     <h2>ACTIVITIES</h2>
                     <p>YOUR GO TO PLACE FOR AFTER SCHOOL ACTIVITES</p>
                     <div class="button">
-                        <button v-on:click="currentSection('Activities')">GO EXPLORE</button>
+                        <button v-on:click="changeSection('Activities')">GO EXPLORE</button>
                     </div>
                     
                 </div>
@@ -104,7 +108,7 @@
                         </div>
                         
                         <div  class="Top-Products">
-                            <div class="product" :key="Activity.id"  v-for="Activity in Activities" v-if="Activity.isPopular ? true : null">
+                            <div class="product"  v-for="(Activity, index)  in Activities" :key="index" v-if="Activity.isPopular ? true : null">
                                
                                 <div class="Content">
                                     <div class="PopularTag">
@@ -125,7 +129,8 @@
                                         </div>
                                         <div class="PopularPrice">
                                             <button id="More"> SEE MORE </button>
-                                            <button id="price"><i class="ri-shopping-cart-2-line"></i> {{Activity.price}}</button>
+                                            <button id="price" v-on:click="addToCart(Activity.id)" v-if="canAddToCart"><i class="ri-shopping-cart-2-line"></i> {{Activity.price}}</button>
+                                            <button disabled="disabled" id="price" v-else ><i class="ri-shopping-cart-2-line"></i> {{Activity.price}}</button>
                                            
                                         </div>
         
@@ -216,103 +221,204 @@
             </div>
 
            
-           <div class="About" v-if="currentSection === 'About'">
+            <div class="About" v-if="currentSection === 'About'">
 
 
-           </div>
-
-           
-           <div class="Contact" v-if="currentSection === 'Contact'">
-
-            
-           </div>
+            </div>
 
            
-           <div class="Activities" v-if="currentSection === 'Activities'">
+            <div class="Contact" v-if="currentSection === 'Contact'">
 
             
-           </div>
+            </div>
+
+           
+            <div class="Activities" v-if="currentSection === 'Activities'">
+
+
+            
+            </div>
+            <div class="Checkout" v-if="currentSection === 'Checkout'">
+               
+
+                <div class="info">
+                   
+                    <div class="form">
+                        <div class="logos">
+                            <div class="return">
+                                <a href="#Home" v-on:Click="changeSection('Home')"><i class="ri-arrow-left-circle-fill"></i></a>
+                            </div>
+                            <i class="ri-visa-line"></i>
+                            <i class="ri-mastercard-fill"></i>
+                            <i class="ri-paypal-fill"></i>
+                            
+                        </div>
+                        <div class="CTitle">
+                            <h1>Shopping <span>Cart</span></h1>
+                          
+
+        
+                        </div>
+                        <form action="">
+                            <div class="txtfield">
+                                
+                                <input type="text" id="first_Name" v-model="order.FirstName" placeholder="First Name" required>
+                            </div>
+                            <div class="txtfield">
+                               
+                                <input type="text" v-model="order.LastName"  placeholder="Last Name" required>
+                            </div>
+                            <div class="txtfield">
+                              
+                                <input type="email" v-model="order.Email"  placeholder="Email Address" required>
+                            </div>
+                            <div class="txtfield">
+                               
+                                <input type="tel" v-model="order.Phone "  placeholder="Phone Number" required>
+                            </div>
+                            
+                        </form>
+                    </div>
+                    <div class="outputfield">
+                        <div class="OutputTitle">
+                            <h1>Order Summary</h1>
+                        </div>
+                        <div class="OutputValues">
+                            <p>First name : {{order.FirstName}}</p>
+                            <p>Last name : {{order.LastName}}</p>
+                            <p>Email Address : {{order.Email}}</p>
+                            <p>Phone Number : {{order.Phone}}</p>
+                            <p>TOTAL PRICE : </p>
+
+                        </div>
+                        <div class="SubmitButton">
+                            <button type="submit" v-on:click="placeOrder()">Place Order</button>
+                        </div>
+                        
+                       
+
+
+                    </div>
+
+                </div>
+
+                <div class="cart">
+                    <div class="CartHeader">
+                        <h1>Your Cart</h1>
+                        <p>Remove all</p>
+                    </div>
+                    <div class="CartHeader2">
+                        <p> items: {{cartCount}}</p>
+                       
+                    </div>
+                    <div class="itemContainer">
+                        <div class="Items" v-for="(Cart, index) in cartData" :key="index">
+                            <div class="itemName">
+                                <h1>{{Cart.name}}</h1>
+                                
+    
+                            </div>
+                            <div class="Item">
+                                <div class="itemLocation">
+                                    <div class="imgContainer">
+                                        <img v-bind:src="Cart.img" alt="">
+                                    </div>
+                                    <p>{{Cart.location}}</p>
+                                    <i class="ri-close-circle-fill" v-on:Click="removeItem(index)"></i>
+    
+    
+                                </div>
+                               
+                                   
+                                <div class="itemPrice">
+                                    <p>{{Cart.price}}</p>
+                                </div>
+
+                            </div>
+                           
+                        </div>
+
+                    </div>
+                    <div class="payments">
+                        <div class="paymentTotal">
+                            <p>TOTAL</p>
+                            <p>{{totalPrice}}</p>
+
+
+                        </div>
+                        <div class="paymentButtons">
+                            <button id="Card"><i class="ri-bank-card-line"></i> CREDIT/DEBIT Card</button>
+                            <button id="PayPal"><span>Pay</span>Pal</button>
+                        </div>
+                    </div>
+                   
+
+                       
+                       
+
+                    </div>
+                   
+                </div>
+
+
+            
+            </div>
 
         </div>
+        <footer class="footer" v-if="currentSection !== 'Checkout'">
+            <h1><i class="ri-copyright-line"></i> All Righs Resrved by LDEV</h1>
+    
+    
+        </footer>
+
+        
+
+
+
+       
+        
+    
 
 
 
     </div>
+   
+    
+   
+
+    <script src="./JS/Activities.js">
+        var Activities = new Vue({
+            el: '#app',
+            data: {
+                Activities: Activities
+            }
+        })
+    </script>
         
     
 
-    <footer class="footer">
-        <h1><i class="ri-copyright-line"></i> All Righs Resrved by LDEV</h1>
-
-
-    </footer>
 
 
     <script type="text/javascript">
+        
         // vue instance
         var app = new Vue({
             el: '#app', // dom mounting point
             data: {
                 currentSection: 'Home', // intially setting current location to Home section
                 sitename: 'JAZKA',
-                Activities:[
-                    {
-                        name: 'Football',
-                        id: 1,
-                        img: '/Images/Activities-IMG/football.jpg',
-                        location: 'TOKYO',
-                        space: '6',
-                        price: '23.30',
-                        isPopular: true
-                    },
-                    {
-                        name: 'Basketball',
-                        id: 2,
-                        img: '/Images/Activities-IMG/basketball.jpg',
-                        location: 'OSAKA',
-                        space: '9',
-                        price: '20.30',
-                        isPopular: true
-                    },
-                    {
-                        name: 'Archery',
-                        id: 3,
-                        img: '/Images/Activities-IMG/—Pngtree—basic basketball drawing_14543340.png',
-                        location: 'TOKYO',
-                        space: '14',
-                        price: '16.50',
-                        isPopular: false
-                    },
-                    {
-                        name: 'Volleyball',
-                        id: 4,
-                        img: '/Images/Activities-IMG/Volleyball.jpg',
-                        location: 'SHIBUYA',
-                        space: '7',
-                        price: '19.30',
-                        isPopular: true
-                    },
-                    {
-                        name: 'Swimming',
-                        id: 5,
-                        img: '/Images/Activities-IMG/swimming.jpg',
-                        location: 'TOKYO',
-                        space: '3',
-                        price: '19.30',
-                        isPopular: true
-                    },
-                    {
-                        name: 'Baseball',
-                        id: 5,
-                        img: '/Images/Activities-IMG/baseball.jpg',
-                        location: 'OSAKA',
-                        space: '6',
-                        price: '25.30',
-                        isPopular: true
-                    }
-                    
+                Activities: Activities,
 
-                ],
+                order:{
+                    FirstName:'',
+                    LastName: '',
+                    Email: '',
+                    Phone: '',
+                   
+
+                },
+                cartData: [], // caart array to contain items added to the cart
+                
 
             
 
@@ -320,13 +426,77 @@
             },
 
             methods: {
-                changeSection: function(section){
+                // function to change sections
+                changeSection:function(section){
                     this.currentSection = section; // setting currentsection to the section passed when the function is called
+                },
+                // function to add activites into cart
+                // passing the Activity.id in the addToCart function 
+                addToCart:function(ActivityID){
+                    // creating a variable to store selecteditem using the .find method
+                    let selectedItem = this.Activities.find( item => item.id === ActivityID) // find the acticity with the same id as the passed activityID
+                    console.log(selectedItem)
+                     // if activity is there push item to cart array
+                    if(selectedItem){
+                        this.cartData.push(selectedItem);
+                        console.log("cart items:", this.cartData);
+
+                    }
+               
+                },
+                // passing the index of item to remove
+                removeItem:function(index){
+                    // using splice function to remove item from cartData
+                    this.cartData.splice(index, 1);
+
+
+
+                },
+
+                placeOrder:function(){
+                    // calling the function to get the order details
+                    alert("Order placed succesfully");
+                },
+
+                // get it fixed ask on monday
+                cartItemCount:function(id){
+                    let count = 0;
+
+                    for(i=0;  i < this.cartData.length; i++){
+                        if(this.cartData[i].id === id){
+                            count++
+                        }
+                    }
+                    return count;
+
+                },
+
+                canAddToCart:function(){
+                    return Activity.space > this.cartItemCount(Activities.id);
+                },
+                showAlert:function(){
+                    alert("Add an Item Into the Cart First!");
                 }
+            },
+            // for reactive values that are re-evaluted when their depnedencies change
+            computed: {
+                cartCount:function(){
+                    // return cart array count or nothing
+
+                    return this.cartData.length || ''
+                    
+
+                }
+               
+              
+        
+                
+
             }
 
         })
     </script>
+   
    
     
 </body>
