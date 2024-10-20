@@ -23,10 +23,10 @@
             <div class="nav">
                 <nav>
                     <div class="links">
-                        <a href="#Home" v-on:click="changeSection('Home')">Home</a>
-                        <a href="#About" v-on:click="changeSection('About')">About</a>
+                        <a href="#" v-on:click="changeSection('Home')">Home</a>
+                        <a href="#About"  v-on:click="changeSection('Home')">About</a>
                         <a href="#Contact" v-on:Click="changeSection('Contact')">Contact</a>
-                        <a href="#Activites" v-on:Click="changeSection('Activities')">Activities</a>
+                        <a href="#" v-on:Click="changeSection('Activities')">Activities</a>
 
                     </div>
                     <div class="title">
@@ -44,7 +44,7 @@
                              <input type="text" id="search"  placeholder="Search activity or location">
                         </div>
                         <div class="Cart">
-                            <a href="#Checkout" v-on:Click="changeSection('Checkout')" v-if="cartCount >=1"><i class="ri-shopping-cart-2-line"></i></a>
+                            <a href="#" v-on:Click="changeSection('Checkout')" v-if="cartCount >=1"><i class="ri-shopping-cart-2-line"></i></a>
                             <a href="#" v-else  v-on:Click="showAlert()"><i class="ri-shopping-cart-2-line"></i></a>
                             <span v-if="cartCount > 0">
                                 <div class="cartCount">{{cartCount}}</div>
@@ -65,7 +65,7 @@
             <!--Background-->
            
 
-           <div class="Home" v-if="currentSection === 'Home'">
+           <div class="Home"   v-if="currentSection === 'Home'">
                 <div class="item">
                     <img src="./Images/Background/torii-gate-alone-mountain-scenery-digital-art-4k-wallpaper-uhdpaper.com-84@2@b.jpg" alt="">
                 </div>
@@ -129,8 +129,8 @@
                                         </div>
                                         <div class="PopularPrice">
                                             <button id="More"> SEE MORE </button>
-                                            <button id="price" v-on:click="addToCart(Activity.id)" v-if="canAddToCart"><i class="ri-shopping-cart-2-line"></i> {{Activity.price}}</button>
-                                            <button disabled="disabled" id="price" v-else ><i class="ri-shopping-cart-2-line"></i> {{Activity.price}}</button>
+                                            <button id="price" v-on:click="addToCart(Activity.id)" v-if="canAddToCart(Activity)"><i class="ri-shopping-cart-2-line"></i> {{Activity.price}}</button>
+                                            <button disabled="disabled" class="DisabledPrice" v-else ><i class="ri-shopping-cart-2-line"></i> {{Activity.price}}</button>
                                            
                                         </div>
         
@@ -152,11 +152,11 @@
     
                     </div>
 
-                    <div class="Mission">
+                    <div class="Mission" >
                         <div class="img">
                             <img src="/Images/logo.png" alt="">
                         </div>
-                        <div class="MTitle">
+                        <div class="MTitle" id="About">
                             <h1>LEARN ABOUT <span>JAZKA</span>ACTIVITIES</h1>
 
                         </div>
@@ -193,7 +193,7 @@
                         <div class="quick_links">
                             <a href="#">Home</a>
                             <a href="#">Contact</a>
-                            <a href="#">Activities</a>
+                            <a href="#" v-on:Click="changeSection('Activities')">Activities</a>
                         </div>
 
                         <div class="Social-logos">
@@ -235,10 +235,74 @@
            
             <div class="Activities" v-if="currentSection === 'Activities'">
 
+                <div class="item">
+                    <img src="/Images/torii-shrine-gate-scenery-sunset-horizon-uhdpaper.com-4K-132.jpg" alt="">
+                </div>
+
+                <div class="ActivityHeader">
+                    <h1>All Activities</h1>
+                    <div class="sorting">
+                        <select v-model="Filter.sort">
+                            <option disabled value="">Filter Activites</option>
+                            <option v-for="(sort, key) in sorts"
+                            v-bind:value="sort">{{key}}</option>
+
+
+                        </select>
+                        
+                    </div>
+                </div>
+
+                <div class="ActivityContainer">
+                    <div class="product" v-for="(Activity, index) in Activities" :id="index">
+                        <div class="Content">
+                            <div class="PopularTag" v-if="Activity.isPopular === true">
+                                <h1>MOST POPULAR</h1>
+
+                            </div>
+                           
+                            <div class="PopularImg">
+                                <img v-bind:src="Activity.img" alt="">
+
+                            </div>
+                            <div class="txt-content">
+                                <div class="PopularName">
+                                    <h1>{{Activity.name}}</h1>
+    
+                                </div>
+                                <div class="PopularLocation">
+                                    <h1>{{Activity.location}}</h1>
+                                </div>
+                                <div class="PopularPrice">
+                                    <button id="More"> SEE MORE </button>
+                                    <button id="price" v-on:click="addToCart(Activity.id)" v-if="canAddToCart(Activity)"><i class="ri-shopping-cart-2-line"></i> {{Activity.price}}</button>
+                                    <button disabled="disabled" class="DisabledPrice" v-else ><i class="ri-shopping-cart-2-line"></i> {{Activity.price}}</button>
+                                   
+                                </div>
+
+
+                            </div>
+                           
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+                
+
 
             
             </div>
+
+
+
+
             <div class="Checkout" v-if="currentSection === 'Checkout'">
+                <div class="item">
+                    <img src="/Images/torii-shrine-gate-scenery-sunset-horizon-uhdpaper.com-4K-132.jpg" alt="">
+                </div>
                
 
                 <div class="info">
@@ -365,11 +429,7 @@
             </div>
 
         </div>
-        <footer class="footer" v-if="currentSection !== 'Checkout'">
-            <h1><i class="ri-copyright-line"></i> All Righs Resrved by LDEV</h1>
-    
-    
-        </footer>
+       
 
         
 
@@ -414,10 +474,19 @@
                     LastName: '',
                     Email: '',
                     Phone: '',
+                     
                    
 
                 },
-                cartData: [], // caart array to contain items added to the cart
+                sorts:{
+                    Default: 'Default',
+                    Location: 'Location',
+                    Subject: 'Subject',
+                    Spaces: "Spaces",
+                    Price: 'Price',
+                },
+                cartData: [], // cart array to contain items added to the cart
+                Filter: '',
                 
 
             
@@ -462,17 +531,20 @@
                 cartItemCount:function(id){
                     let count = 0;
 
-                    for(i=0;  i < this.cartData.length; i++){
+                    for(let i = 0;  i < this.cartData.length; i++){
                         if(this.cartData[i].id === id){
                             count++
                         }
                     }
                     return count;
+                
 
                 },
+                
 
-                canAddToCart:function(){
-                    return Activity.space > this.cartItemCount(Activities.id);
+                canAddToCart:function(Activity){
+                    console.log("the can add to cart activty:", Activity)
+                    return Activity.space > this.cartItemCount(Activity.id);
                 },
                 showAlert:function(){
                     alert("Add an Item Into the Cart First!");

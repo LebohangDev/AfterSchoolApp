@@ -5,16 +5,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap');
 
-
-
-html, body {
-    font-family: 'Poppins', sans-serif;  /* Added a fallback font */
-    margin: 0;
+html{
     overflow-x: hidden;
     overflow-y: scroll;
     scroll-behavior: smooth;
     scrollbar-width: none;
+    height: auto;
+    width: 100%;
+
+}
+
+
+body {
+    font-family: 'Poppins', sans-serif;  /* Added a fallback font */
+    margin: 0;
+    overflow: hidden;
     background-color: #000;  /* Hex color shorthand for black */
+   
 }
 
 @keyframes fadeIn {
@@ -41,6 +48,19 @@ html, body {
 }
 
 
+@keyframes fadeInDown {
+    0%{
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    100%{
+        transform: translateY(0px);
+        opacity: 1;
+    }
+
+}
+
+
 
 #app{
     display: grid;
@@ -54,10 +74,10 @@ html, body {
     "cont     cont     cont  "
     "footer   footer   footer";
     background: rgb(15,0,80);
-    background: linear-gradient(0deg, rgb(5, 0, 27) 0%, rgb(53, 0, 0) 100%);
+    background: linear-gradient(0deg, rgb(5, 0, 27) 0%, rgb(27, 0, 0) 100%);
     font-size: 12px;
   
-    gap: 10px;
+  
   
 
 
@@ -239,7 +259,7 @@ html, body {
 .Home{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 100vh 100% auto ;
+    grid-template-rows: 100vh 1fr;
     grid-template-areas: 
     "Title    Title    .       "
     "GridShow GridShow GridShow";
@@ -454,6 +474,12 @@ html, body {
 }
 
 
+.Home .showcase .Top-Products .product{
+    opacity: 0;
+    animation: fadeInDown 0.3s forwards;
+}
+
+
 .Home .showcase .Top-Products .product .Content .PopularImg img{
     width: 100%;
     height: 100%;
@@ -569,6 +595,23 @@ html, body {
     pointer-events: all;
 
 }
+
+
+.Home .showcase .Top-Products .product .Content .txt-content .PopularPrice .DisabledPrice{
+    padding: 10px;
+    width: 100px;
+    background-color: rgb(53, 16, 87);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    position: relative;
+    top: 0px;
+    transition: 0.3s ease-out;
+    pointer-events: all;
+
+
+}
+
 
 
 .Home .showcase .Top-Products .product .Content .txt-content .PopularPrice #More{
@@ -825,6 +868,267 @@ html, body {
 }
 
 
+
+
+
+
+
+/*Activities section*/
+.Activities{
+    animation: fadeIn 0.3s ease-out;
+    position: relative;
+    bottom: 4%;
+
+
+}
+
+.Activities .item{
+    position: fixed;
+    inset:  0 0 0 0;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+.Activities .item img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.Activities .ActivityHeader{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    z-index: 1;
+    margin-left: 120px;
+    margin-right: 120px;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+
+.Activities .ActivityHeader h1{
+    font-weight: 700;
+    font-size: 2rem;
+    color: white;
+    letter-spacing: 4px;
+
+
+}
+
+
+
+
+
+.Activities .ActivityContainer{
+    
+    display: flex;
+    z-index: 1;
+    flex-direction: row;
+    overflow-x: scroll;
+    scrollbar-width: none;
+    overflow-y: scroll;
+    width: 85%;
+    height: 74vh;
+    position: relative;
+    margin-left: 8%;
+    bottom: 10%;
+    gap: 20px;
+    align-items: flex-end;
+    flex-wrap: wrap;
+
+    
+
+}
+
+
+
+.Activities .ActivityContainer .product .Content .PopularImg{
+    position: absolute;
+    inset: 0 0 0 0;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  
+  
+  
+}
+
+
+.Activities .ActivityContainer .product .Content .PopularImg img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+    filter: grayscale(1) brightness(60%);
+    transition: 0.3s ease-out;
+    
+}
+
+
+.Activities .ActivityContainer .product .Content .PopularImg img:hover{
+    filter: grayscale(0) brightness(100%);
+    cursor: pointer;
+
+}
+
+.Activities .ActivityContainer .product .Content{
+    background-color: transparent;
+    backdrop-filter: blur(5px);
+    background-image:  linear-gradient(
+        rgba(235, 6, 6),
+        rgb(231, 209, 3)
+    );
+    
+    width: 300px;
+    height: 40em;
+    border-radius: 5px;
+    
+   
+    
+    
+
+}
+
+
+.Activities .ActivityContainer .product .Content .PopularTag{
+    position: relative;
+    left: 60%;
+    top: 4%;
+    background-color: red;
+    width: 130px;
+    box-shadow: 5px 5px 5px black;
+    
+
+
+
+}
+
+
+.Activities .ActivityContainer .product .Content .PopularTag h1{
+    font-size: 0.8rem;
+    color: white;
+    text-align: center;
+
+}
+
+
+.Activities .ActivityContainer .product .Content .txt-content{
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    left: 18%;
+    line-height: 4px;
+    pointer-events: none;
+    
+    
+   
+
+
+
+}
+
+
+.Activities .ActivityContainer .product .Content .txt-content .PopularName h1{
+    color: white;
+    font-size: 2rem;
+    letter-spacing: 4px;
+   
+}
+
+
+.Activities .ActivityContainer .product .Content .txt-content .PopularLocation h1{
+    color: rgb(248, 248, 248);
+    font-weight: 300;
+    letter-spacing: 2px;
+    
+
+}
+
+
+.Activities .ActivityContainer .product .Content .txt-content .PopularPrice{
+    position: relative;
+    top: 60px;
+    
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+    gap: 12px;
+
+}
+
+
+.Activities .ActivityContainer .product .Content .txt-content .PopularPrice #price{
+    padding: 10px;
+    width: 100px;
+    background-color: blueviolet;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    position: relative;
+    top: 0px;
+    transition: 0.3s ease-out;
+    pointer-events: all;
+
+}
+
+
+.Activities .ActivityContainer .product .Content .txt-content .PopularPrice .DisabledPrice{
+    padding: 10px;
+    width: 100px;
+    background-color: rgb(53, 16, 87);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    position: relative;
+    top: 0px;
+    transition: 0.3s ease-out;
+    pointer-events: all;
+
+}
+
+
+.Activities .ActivityContainer .product .Content .txt-content .PopularPrice #More{
+    padding: 10px;
+    width: 100px;
+    background-color: transparent;
+    border: 2px solid blueviolet;
+    color: blueviolet;
+    font-weight: 600;
+    border-radius: 25px;
+    position: relative;
+    top: 0px;
+    transition: 0.3s ease-out;
+    pointer-events: all;
+
+}
+
+
+.Activities .ActivityContainer .product .Content .txt-content .PopularPrice #price:hover{
+    top: -2px;
+    cursor: pointer;
+}
+
+
+.Activities .ActivityContainer .product .Content .txt-content .PopularPrice #More:hover{
+    top: -2px;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+/*Checkout section*/
+
+
 .Checkout{
     display: grid;
   
@@ -840,6 +1144,21 @@ html, body {
 
     animation: fadeIn 0.3s ease-in-out;
     
+}
+
+
+.Checkout .item{
+    position: fixed;
+    inset:  0 0 0 0;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+.Checkout .item img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .info{
