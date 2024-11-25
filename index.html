@@ -600,28 +600,6 @@
                 },
                 
                 async fetchOrders(){
-<<<<<<< HEAD
-                    var email = this.order.email
-                    var button = document.getElementById('order-button')
-
-                    function checkEmail(email, button){
-                        var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-                        var result = emailRegex.test(email);
-                        if(result){
-                            button.disabled = false;
-                            document.getElementById('msg').innerText=  '';
-                        }
-                        else{
-                            button.disabled = true;
-                            document.getElementById('msg').innerText = 'invalid Email';
-                        }
-
-    return result
-}
-
-                    
-=======
->>>>>>> 88a16031d11b9ed3f159555d5ad1b4cb29a1d0ca
                     alert("order succesfully placed");
                     const orderData = [{
                         name: this.order.FirstName,
