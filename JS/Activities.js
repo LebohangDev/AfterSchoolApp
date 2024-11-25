@@ -13,6 +13,7 @@ let Activities =[
         location: 'TOKYO',
         space: 6,
         price: '23.30',
+        rating: 5,
         isPopular: true
     },
     {
@@ -22,7 +23,9 @@ let Activities =[
         location: 'OSAKA',
         space: 9,
         price: '20.30',
+        rating: 5,
         isPopular: true
+        
     },
     {
         name: 'Archery',
@@ -31,6 +34,7 @@ let Activities =[
         location: 'TOKYO',
         space: 14,
         price: '16.50',
+        rating: 3,
         isPopular: false
     },
     {
@@ -40,6 +44,7 @@ let Activities =[
         location: 'SHIBUYA',
         space: 7,
         price: '19.30',
+        rating: 5,
         isPopular: true
     },
     {
@@ -49,6 +54,7 @@ let Activities =[
         location: 'TOKYO',
         space: 3,
         price: '19.30',
+        rating: 4,
         isPopular: true
     },
     {
@@ -58,6 +64,7 @@ let Activities =[
         location: 'OSAKA',
         space: 6,
         price: '25.30',
+        rating: 5,
         isPopular: true
     },
     {
@@ -67,6 +74,7 @@ let Activities =[
         location: 'SHIBUYA',
         space: 7,
         price: '19.30',
+        rating: 5,
         isPopular: true
     },
     {
@@ -76,6 +84,7 @@ let Activities =[
         location: 'TOKYO',
         space: 3,
         price: '19.30',
+        rating: 4,
         isPopular: true
     },
     {
@@ -85,6 +94,7 @@ let Activities =[
         location: 'OSAKA',
         space: 6,
         price: '25.30',
+        rating: 5,
         isPopular: true
     },
     {
@@ -94,6 +104,7 @@ let Activities =[
         location: 'SHIBUYA',
         space: 7,
         price: '19.30',
+        rating: 5,
         isPopular: true
     },
     {
@@ -103,6 +114,7 @@ let Activities =[
         location: 'TOKYO',
         space: 3,
         price: '19.30',
+        rating: 4,
         isPopular: true
     },
     {
@@ -112,6 +124,7 @@ let Activities =[
         location: 'OSAKA',
         space: 6,
         price: '25.30',
+        rating: 5,
         isPopular: true
     },
     {
@@ -121,6 +134,7 @@ let Activities =[
         location: 'SHIBUYA',
         space: 7,
         price: '19.30',
+        rating: 5,
         isPopular: true
     },
     {
@@ -130,6 +144,7 @@ let Activities =[
         location: 'TOKYO',
         space: 3,
         price: '19.30',
+        rating: 4,
         isPopular: true
     },
     {
@@ -139,6 +154,7 @@ let Activities =[
         location: 'OSAKA',
         space: 6,
         price: '25.30',
+        rating: 5,
         isPopular: true
     }
     
