@@ -41,7 +41,17 @@
                                 <i class="ri-search-line"></i>
             
                             </div>
-                             <input type="text" id="search" v-model="searchResult" placeholder="Search activity or location">
+                             <input type="text" id="search" v-model="searchValue" @input="getProductsOne(searchValue)" placeholder="Search activity or location">
+                             <ul class="autoComplete" >
+                                <li v-for="(suggestion, index) in suggestions" :key="index">
+
+                                    {{suggestion.searchName}}
+                                  
+
+                                </li>
+
+                             </ul>
+                            
                         </div>
                         <div class="Cart">
                             <a href="#" v-on:Click="changeSection('Checkout')" v-if="cartCount >=1"><i class="ri-shopping-cart-2-line"></i></a>
@@ -274,7 +284,7 @@
                     
 
                 <div class="ActivityContainer">
-                    <div class="product" v-for="(Activity, index) in sortedProducts" :key="Activity.index">
+                    <div class="product" v-for="(Activity, index) in filteredActivites" :key="Activity.index">
                         <div class="Content">
                             <div class="PopularTag" v-if="Activity.isPopular === true">
                                 <h1>MOST POPULAR</h1>
@@ -318,6 +328,8 @@
                     </div>
 
                    
+
+                   
                     </div>
                    
                 </div>
@@ -332,7 +344,7 @@
 
 
 
-            <div class="Checkout" v-if="currentSection === 'Checkout'">
+            <div class="Checkout"  v-if="currentSection === 'Checkout'">
                 <div class="item">
                     <img src="/Images/torii-shrine-gate-scenery-sunset-horizon-uhdpaper.com-4K-132.jpg" alt="">
                 </div>
@@ -356,7 +368,7 @@
 
         
                         </div>
-                        <form action="">
+                        <form action="" >
                             <div class="txtfield">
                                 
                                 <input type="text" class="first_Name" id="FirstName" v-model="order.FirstName" placeholder="First Name" required>
@@ -389,7 +401,7 @@
 
                         </div>
                         <div class="SubmitButton">
-                            <button id="order-button" type="submit"  v-on:click="fetchOrders(); updateSpace()">Place Order</button>
+                            <button onsubmit="isFormValid" id="order-button" type="submit" :disabled ="!isFormValid"  v-on:click="fetchOrders(); updateSpace()">Place Order</button>
                         </div>
                         
                        
@@ -476,6 +488,9 @@
 
     </div>
 
+    
+
+
         
     
 
@@ -489,6 +504,7 @@
             data: {
                 currentSection: 'Home', // intially setting current location to Home section
                 Activities: [], // store the fetched actitivies
+                
                
                 sitename: 'JAZKA',
 
@@ -515,7 +531,9 @@
                     ascending: true,
                 },
 
-                searchResult: '',
+                searchValue: '',
+                suggestions: [] // array to store the search results
+
                 
                 
 
@@ -598,9 +616,23 @@
                     }
                     
                 },
+                 
                 
                 async fetchOrders(){
+                    
+                    
+                   
+
+
+
                     alert("order succesfully placed");
+                      // clearing data after submitting ordder
+                    this.order.FirstName = '';
+                    this.order.LastName = '';
+                    this.order.Email = '';
+                    this.order.Phone = '';
+                    this.cartData = [];  // Clears the cart
+                    
                     const orderData = [{
                         name: this.order.FirstName,
                         LastName: this.order.LastName,
@@ -670,10 +702,45 @@
                     }catch(error){
                         console.error("failed to update data:", error);
                     }
+                  
         
                   
                     
 
+
+                },
+
+                async getProductsOne(str){
+                    try{
+
+                        let searchResult = str // replacing all commans with an emepty string 
+
+    
+                        const response = await fetch('http://localhost:3000/collection/Products/search?name=%20' + searchResult)
+                      
+                        console.log("search result:", searchResult)
+                        
+
+                        const data = await response.json();
+                        this.suggestions = data
+                        console.log("suggestiors array:", suggestions);
+                        console.log("data: ", data);
+
+                        if (response.ok){
+                            //suggestions = data;
+
+                            //console.log("query results stored:", suggestions)
+                        }
+
+                     
+
+                        
+
+                    }catch (error){
+                        console.error("failed to get products:", error);
+                        
+
+                    }
 
                 }
               
@@ -697,12 +764,18 @@
                 },
 
                 // sorting Activities
-                sortedProducts(){
-                    let sortedActivities = this.Activities.slice(); // making a copy of the activities array of objects
+                filteredActivites(){
+                    let tempActivities = this.Activities; // making a copy of the activities array of objects
+
+                    if (this.searchValue != ''  && this.searchValue){
+                        tempActivities = tempActivities.filter((activity) =>{
+                            return activity.name.toUpperCase().includes(this.searchValue.toUpperCase())
+                        })
+                    }
 
 
 
-                    sortedActivities = sortedActivities.sort((a, b) =>{
+                    tempActivities = tempActivities.sort((a, b) =>{
 
                         if (this.Filter.sort === 'Name'){
                             // convertng strings all to lowercase or sorted results will prioritize capitilized letters
@@ -761,7 +834,9 @@
                            
     
                         }
+                       
 
+                 
                         
                         
                     })
@@ -771,11 +846,32 @@
                         sortedActivities.reverse()
                     }
 
-                    return sortedActivities
+                    return tempActivities
                     
 
 
-                }
+                },
+
+                //check if form is valid
+
+                isFormValid() {
+        const phoneRegex = /^\d{10}$/;
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+        return (
+            this.order.FirstName &&
+            this.order.LastName &&
+            emailRegex.test(this.order.Email) &&
+            phoneRegex.test(this.order.Phone) &&
+            this.cartData.length > 0 // Ensure cart is not empty
+        );
+    }
+
+
+
+               
+
+             
 
                 
                 

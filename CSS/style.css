@@ -186,6 +186,8 @@ body {
     display: flex;
     flex-direction: row;
     gap: 0px;
+  
+     
 }
 .header .nav .Search .searchIcon i{
     position: relative;
@@ -200,6 +202,7 @@ body {
     color: rgb(255, 255, 255);
     background-color: rgb(255, 0, 0);
     padding: 5.6px;
+    z-index: 3;
   
     
 }
@@ -217,6 +220,9 @@ body {
     border: none;
     border-radius: 5px;
    
+    box-shadow: 5px 5px 5px black;
+    z-index: 2;
+   
     background-image: linear-gradient(
       120deg,
       rgba(255, 255, 255),
@@ -228,10 +234,62 @@ body {
 }
 
 
-.Search input:focus{
+
+.header .nav .Search input:focus{
     outline: 3px solid rgb(255, 0, 0);
+
+}
+
+
+
+
+.autoComplete{
+    position: fixed;
+    left: 72.7%;
+    width: 19.2%;
+    
+    overflow-y: scroll;
+    scrollbar-width: none;
+    top: 8%;
+    
+    list-style-type: none;
+    border-radius: 5px;
+
+    z-index: 1;
+
+    background-color: white;
    
-  }
+    padding: 0;
+    display: flex;
+    flex-direction: column ;
+    border: 2px solid rgb(228, 228, 228);
+    opacity: 0;
+    animation: fadeInDown 0.3s forwards;
+    
+}
+
+.autoComplete li{
+    color: rgb(0, 0, 0);
+    font-size: 0.8rem ;
+    letter-spacing: 2px;
+    line-height: 30px;
+  
+  
+
+
+}
+
+
+.autoComplete li:hover{
+    background-color: #e2e2e2;
+    cursor: pointer;
+}
+
+
+.autoComplete li:active{
+    background-color: #d4d4d4;
+
+}
 
   .header .nav .Cart{
     position: relative;
