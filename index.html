@@ -638,12 +638,7 @@
 
 
                     alert("order succesfully placed");
-                      // clearing data after submitting ordder
-                    this.order.FirstName = '';
-                    this.order.LastName = '';
-                    this.order.Email = '';
-                    this.order.Phone = '';
-                    this.cartData = [];  // Clears the cart
+                  
                     
                     const orderData = [{
                         name: this.order.FirstName,
@@ -689,13 +684,14 @@
 
                 async updateSpace(){
                    
-                    let selectedItem = this.cartData.find( item => item._id)
+                    let selectedItem = this.cartData.find( item => item.id)
+                    console.log(selectedItem)
                     if(selectedItem){
                         selectedItem.space = selectedItem.space - 1 
                     }
         
                     try {
-                        const response = await fetch(`https://jazkaserver.onrender.com/collection/Products/${selectedItem._id}`, {
+                        const response = await fetch(`https://jazkaserver.onrender.com/collection/Products/${selectedItem.id}`, {
                             method: 'PUT',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -714,6 +710,13 @@
                     }catch(error){
                         console.error("failed to update data:", error);
                     }
+
+                    // clearing data after submitting ordder
+                    this.order.FirstName = '';
+                    this.order.LastName = '';
+                    this.order.Email = '';
+                    this.order.Phone = '';
+                    this.cartData = [];  // Clears the cart
                   
         
                   
@@ -721,6 +724,8 @@
 
 
                 },
+
+                
 
                 async getProductsOne(str){
                     try{
