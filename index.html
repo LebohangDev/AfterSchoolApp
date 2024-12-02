@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="./CSS/style.css">
     <title>After School App</title>
-     <!-- External icon libraries -->
-      <link rel="stylesheet" href="Jazka.webmanifest">
-     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet">
+     
+    <link rel="manifest" href="./JS/Jazka.webmanifest">
+    <!-- External icon libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
     <script>
@@ -48,16 +49,20 @@
                                 <i class="ri-search-line"></i>
             
                             </div>
-                             <input type="text" id="search" v-model="searchValue" @input="getProductsOne(searchValue)" placeholder="Search activity or location">
-                             <ul class="autoComplete" >
-                                <li v-for="(suggestion, index) in suggestions" :key="index">
+                            <div class="searchItems">
+                                <input type="text" id="search" v-model="searchValue" @input="getProductsOne(searchValue)" placeholder="Search activity...">
+                                <ul class="autoComplete" >
+                                   <li v-for="(suggestion, index) in suggestions" :key="index">
+   
+                                       {{suggestion.searchName}}
+                                     
+   
+                                   </li>
+   
+                                </ul>
 
-                                    {{suggestion.searchName}}
-                                  
-
-                                </li>
-
-                             </ul>
+                            </div>
+                            
                             
                         </div>
                         <div class="Cart">
