@@ -4,7 +4,7 @@
     "description": "Jazka Activities is a platform that offers a variety of activities for kids",
     "icons": [
         {
-            "src":"/Images/Jazka-Logo.png",
+            "src":"Images/Jazka-Logo.png",
             "sizes": "512x512",
             "type": "image/png"
         }
