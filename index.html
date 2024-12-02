@@ -614,7 +614,7 @@
 
                 async fetchActivities(){
                     try{
-                        const response  = await fetch('http://localhost:3000/collection/Products');
+                        const response  = await fetch('https://jazkaserver.onrender.com/collection/Products');
                         const data = await response.json();
                         this.Activities = data;
                         console.log("succesfully fetched data:", data);
@@ -673,7 +673,7 @@
                     }]
                   
                     try{
-                        const response = await fetch('http://localhost:3000/collection/Orders',{
+                        const response = await fetch('https://jazkaserver.onrender.com/collection/Orders',{
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -695,7 +695,7 @@
                     }
         
                     try {
-                        const response = await fetch(`http://localhost:3000/collection/Products/${selectedItem._id}`, {
+                        const response = await fetch(`https://jazkaserver.onrender.com/collection/Products/${selectedItem._id}`, {
                             method: 'PUT',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -728,7 +728,7 @@
                         let searchResult = str // replacing all commans with an emepty string 
 
     
-                        const response = await fetch('http://localhost:3000/collection/Products/search?name=%20' + searchResult)
+                        const response = await fetch('https://jazkaserver.onrender.com/collection/Products/search?name=%20' + searchResult)
                       
                         console.log("search result:", searchResult)
                         
