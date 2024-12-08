@@ -553,11 +553,7 @@ body {
 
 .Home .showcase .Top-Products .product .Content{
     background-color: transparent;
-    backdrop-filter: blur(5px);
-    background-image:  linear-gradient(
-        rgba(235, 6, 6),
-        rgb(231, 209, 3)
-    );
+   
     
     width: 300px;
     height: 40em;
